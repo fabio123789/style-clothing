@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -18,20 +18,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googlProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googlProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googlProvider);
 export const db = getFirestore();
 
-export const createuserDocFromAuth = async (userAuth) => {
+export const createuserDocFromAuth = async (userAuth, additionalInformation = {}) => {
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot.exists());
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -41,10 +40,24 @@ export const createuserDocFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation
       });
     } catch (error) {
       console.log("Something went wrong:", error);
     }
   }
   return userDocRef;
+};
+
+export const createAuthUserEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  try{
+    return await createUserWithEmailAndPassword(auth, email, password);
+  }
+  catch(error) {
+    if(error.code === "auth/email-already-in-use"){
+      return alert("email already in use")
+    }
+    console.log("something went wrong", error);
+  }
 };
