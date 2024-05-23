@@ -2,8 +2,11 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -28,7 +31,10 @@ export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, googlProvider);
 export const db = getFirestore();
 
-export const createuserDocFromAuth = async (userAuth, additionalInformation = {}) => {
+export const createUserDocFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
   if (!userSnapshot.exists()) {
@@ -40,7 +46,7 @@ export const createuserDocFromAuth = async (userAuth, additionalInformation = {}
         displayName,
         email,
         createdAt,
-        ...additionalInformation
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("Something went wrong:", error);
@@ -51,13 +57,26 @@ export const createuserDocFromAuth = async (userAuth, additionalInformation = {}
 
 export const createAuthUserEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-  try{
+  try {
     return await createUserWithEmailAndPassword(auth, email, password);
-  }
-  catch(error) {
-    if(error.code === "auth/email-already-in-use"){
-      return alert("email already in use")
+  } catch (error) {
+    if (error.code === "auth/email-already-in-use") {
+      return alert("email already in use");
     }
     console.log("something went wrong", error);
   }
 };
+
+export const signinAuthUserEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  try {
+    return await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    console.log("something went wrong", error);
+  }
+};
+
+export const signoutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);

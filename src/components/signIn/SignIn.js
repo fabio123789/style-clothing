@@ -1,30 +1,25 @@
 import React from "react";
 import { useState } from "react";
 import {
-  createAuthUserEmailAndPassword,
-  createUserDocFromAuth,
+  signInWithGooglePopup,
+  signinAuthUserEmailAndPassword,
 } from "../../utils/firebase/Firebase";
 import FormInput from "../formInput/FormInput";
-import "./SignUp.scss";
+import "./SignIn.scss";
 import Button from "../button/Button";
 
 const defaultFormFields = {
-  displayName: "",
   email: "",
   password: "",
-  confirmPassword: "",
 };
 
-const SignUp = () => {
+const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const { email, password } = formFields;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { password, confirmPassword, email, displayName } = formFields;
-    if (password !== confirmPassword) {
-      return alert("Passwords does not match");
-    }
+    const { password, email } = formFields;
     if (
       !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
         email
@@ -32,9 +27,22 @@ const SignUp = () => {
     ) {
       return alert("invalid Email");
     }
-    const { user } = await createAuthUserEmailAndPassword(email, password);
-    await createUserDocFromAuth(user, { displayName });
-    setFormFields(defaultFormFields);
+    try {
+      await signinAuthUserEmailAndPassword(email, password);
+      setFormFields(defaultFormFields);
+    } catch (error) {
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("incorrect password");
+          break;
+        case "auth/user-not-found":
+          alert("user not associeted that email");
+          break;
+        default:
+          break;
+      }
+      console.log(error);
+    }
   };
 
   const handleChange = (event) => {
@@ -43,19 +51,19 @@ const SignUp = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  const logGoogleUser = async () => {
+    try {
+      await signInWithGooglePopup();
+    } catch (error) {
+      console.error("Error logging in with Google", error);
+    }
+  };
+
   return (
-    <div className="sign-up-container">
-      <h2>Dont have an account?</h2>
-      <span>Sign up with your email and password</span>
+    <div className="sign-in-form-container">
+      <h2>Already have an account?</h2>
+      <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <FormInput
-          label="Display Name"
-          type="text"
-          required
-          onChange={handleChange}
-          name="displayName"
-          value={displayName}
-        />
         <FormInput
           label="Email"
           type="email"
@@ -73,19 +81,15 @@ const SignUp = () => {
           name="password"
           value={password}
         />
-        <FormInput
-          label="Confirm Password"
-          type="password"
-          required
-          minLength={6}
-          onChange={handleChange}
-          name="confirmPassword"
-          value={confirmPassword}
-        />
-        <Button type="submit">Sign Up</Button>
+        <div className="sign-in-buttons-container">
+          <Button type="submit">Sign In</Button>
+          <Button type="button" buttonType="google" onClick={logGoogleUser}>
+            Google Sign In
+          </Button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;

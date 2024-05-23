@@ -4,7 +4,7 @@ import Navigation from "./components/navigation/Navigation";
 import ErrorBoundary from "./components/errorBoundary/ErrorBoundary";
 
 const Home = lazy(() => import("./routes/home/Home"));
-const Signin = lazy(() => import("./routes/signin/Signin"));
+const Authentication = lazy(() => import("./routes/authentication/Authentication"));
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/sign-in" element={<Signin />} />
+            <Route path="/auth" element={<Authentication />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
