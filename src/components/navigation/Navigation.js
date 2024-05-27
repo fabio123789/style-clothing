@@ -3,9 +3,12 @@ import { Link, Outlet } from "react-router-dom";
 import "./Navigation.scss";
 import { userContext } from "../../contexts/userContext";
 import { signoutUser } from "../../utils/firebase/Firebase";
+import { cartContext } from "../../contexts/cartContext";
+import { CartDropdown, CartIcon } from "../cart/Cart";
 
 const Navigation = () => {
   const { currentUser } = useContext(userContext);
+  const { cartDropdown } = useContext(cartContext);
 
   const signOutHandler = async () => {
     await signoutUser();
@@ -29,7 +32,9 @@ const Navigation = () => {
               sign-in
             </Link>
           )}
+          <CartIcon />
         </div>
+        {cartDropdown && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>

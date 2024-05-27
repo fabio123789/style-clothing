@@ -13,15 +13,10 @@ export const userContext = createContext({
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const value = { currentUser, setCurrentUser };
-  const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
         createUserDocFromAuth(user);
-        navigate("/")
-      }
-      else{
-        navigate("/auth")
       }
       setCurrentUser(user);
     });

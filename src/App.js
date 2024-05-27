@@ -2,9 +2,12 @@ import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Navigation from "./components/navigation/Navigation";
 import ErrorBoundary from "./components/errorBoundary/ErrorBoundary";
+import Shop from "./routes/shop/Shop";
 
 const Home = lazy(() => import("./routes/home/Home"));
-const Authentication = lazy(() => import("./routes/authentication/Authentication"));
+const Authentication = lazy(() =>
+  import("./routes/authentication/Authentication")
+);
 
 function App() {
   return (
@@ -15,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Authentication />} />
+            <Route path="/shop" element={<Shop />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
