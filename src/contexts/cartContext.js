@@ -16,12 +16,42 @@ const addCartItem = (cartItems = [], product = {}) => {
   }
 };
 
+const handleCartItemAction = (cartItems, cartItem, action) => {
+  switch (action) {
+    case "add":
+      return cartItems.map((tempCartItem) =>
+        tempCartItem.id === cartItem.id
+          ? { ...tempCartItem, quantity: tempCartItem.quantity + 1 }
+          : tempCartItem
+      );
+    case "remove":
+      return cartItems
+        .map((tempCartItem) =>
+          tempCartItem.id === cartItem.id
+            ? {
+                ...tempCartItem,
+                quantity:
+                  tempCartItem.quantity > 0 ? tempCartItem.quantity - 1 : 0,
+              }
+            : tempCartItem
+        )
+        .filter((tempCartItem) => tempCartItem.quantity > 0);
+    case "delete":
+      return cartItems.filter(
+        (tempCartItem) => tempCartItem.id !== cartItem.id
+      );
+    default:
+      return cartItems;
+  }
+};
+
 export const cartContext = createContext({
   cartDropdown: false,
   setCartDropdown: () => null,
   cartItems: [],
   addItemToCart: () => null,
   getTotalQuantity: () => null,
+  handleCartItem: () => null,
 });
 
 export const CartProvider = ({ children }) => {
@@ -36,12 +66,17 @@ export const CartProvider = ({ children }) => {
     return cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
   };
 
+  const handleCartItem = (cartItem, action) => {
+    setCartItems(handleCartItemAction(cartItems, cartItem, action));
+  };
+
   const value = {
     cartDropdown,
     setCartDropdown,
     cartItems,
     addItemToCart,
     getTotalQuantity,
+    handleCartItem,
   };
   return <cartContext.Provider value={value}>{children}</cartContext.Provider>;
 };
