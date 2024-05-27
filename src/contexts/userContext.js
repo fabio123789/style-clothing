@@ -3,7 +3,6 @@ import {
   createUserDocFromAuth,
   onAuthStateChangedListener,
 } from "../utils/firebase/Firebase";
-import { useNavigate } from "react-router-dom";
 
 export const userContext = createContext({
   currentUser: null,
