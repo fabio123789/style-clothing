@@ -1,6 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Category.scss";
 import ProductCard from "../productCard/ProductCard";
+import {
+  CategoriesContainer,
+  CategoryPreviewContainer,
+  CategoryPreviewGrid,
+  CategoryTitle,
+} from "./CtegoryStyled";
 
 const Category = ({ categoryItem = {} }) => {
   const { imageUrl, title } = categoryItem;
@@ -24,28 +30,28 @@ const Category = ({ categoryItem = {} }) => {
 
 export const Categories = ({ categoriesArray = [] }) => {
   return (
-    <div className="categories-container">
+    <CategoriesContainer>
       {categoriesArray.map((category) => {
         return <Category categoryItem={category} key={category.id} />;
       })}
-    </div>
+    </CategoriesContainer>
   );
 };
 
 export const CategoryPreview = ({ title, products }) => {
   return (
-    <div className="category-preview-container">
+    <CategoryPreviewContainer>
       <h2>
-        <Link to={title} className="title">{title.toUpperCase()}</Link>
+        <CategoryTitle to={title}>{title.toUpperCase()}</CategoryTitle>
       </h2>
-      <div className="preview">
+      <CategoryPreviewGrid>
         {products
           .filter((_, index) => index < 4)
           .map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-      </div>
-    </div>
+      </CategoryPreviewGrid>
+    </CategoryPreviewContainer>
   );
 };
 

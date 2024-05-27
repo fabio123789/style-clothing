@@ -7,6 +7,8 @@ export const categoriesMapContext = createContext({
 });
 
 export const CategoriesMapProvider = ({ children }) => {
+  const [categoriesMap, setCategoriesMap] = useState({});
+
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments();
@@ -14,7 +16,6 @@ export const CategoriesMapProvider = ({ children }) => {
     };
     getCategoriesMap();
   }, []);
-  const [categoriesMap, setCategoriesMap] = useState({});
   const value = { categoriesMap };
   return (
     <categoriesMapContext.Provider value={value}>

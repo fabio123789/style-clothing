@@ -5,8 +5,8 @@ import {
   signinAuthUserEmailAndPassword,
 } from "../../utils/firebase/Firebase";
 import FormInput from "../formInput/FormInput";
-import "./SignIn.scss";
 import Button from "../button/Button";
+import { SignInButtonsContainer, SignInFormContainer } from "./SignInStyled";
 
 const defaultFormFields = {
   email: "",
@@ -60,7 +60,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in-form-container">
+    <SignInFormContainer>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -81,14 +81,14 @@ const SignIn = () => {
           name="password"
           value={password}
         />
-        <div className="sign-in-buttons-container">
+        <SignInButtonsContainer>
           <Button type="submit">Sign In</Button>
           <Button type="button" buttonType="google" onClick={logGoogleUser}>
             Google Sign In
           </Button>
-        </div>
+        </SignInButtonsContainer>
       </form>
-    </div>
+    </SignInFormContainer>
   );
 };
 
