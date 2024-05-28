@@ -5,7 +5,7 @@ import {
   signinAuthUserEmailAndPassword,
 } from "../../utils/firebase/Firebase";
 import FormInput from "../formInput/FormInput";
-import Button from "../button/Button";
+import Button, { buttonTypeClass } from "../button/Button";
 import { SignInButtonsContainer, SignInFormContainer } from "./SignInStyled";
 
 const defaultFormFields = {
@@ -83,7 +83,7 @@ const SignIn = () => {
         />
         <SignInButtonsContainer>
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType="google" onClick={logGoogleUser}>
+          <Button type="button" buttonType={buttonTypeClass.google} onClick={logGoogleUser}>
             Google Sign In
           </Button>
         </SignInButtonsContainer>

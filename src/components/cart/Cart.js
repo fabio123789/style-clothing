@@ -1,22 +1,36 @@
 import React, { useContext } from "react";
 import Button from "../button/Button";
-import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
-import "./Cart.scss";
+import "./CartStyled.js";
 import { cartContext } from "../../contexts/cartContext";
 import { useNavigate } from "react-router-dom";
+import {
+  CartDropdownContainer,
+  CartDropdownItemsContainer,
+  CartIconContainer,
+  CartIconCount,
+  CartIconShoppingIcon,
+  CartItemContainer,
+  CartItemDetailsContainer,
+  CartItemName,
+  EmptyMessage,
+} from "./CartStyled.js";
 
 export const CartDropdown = () => {
   const { cartItems } = useContext(cartContext);
   const navigate = useNavigate();
   return (
-    <div className="cart-dropdown-container">
-      <div className="cart-dropdown-items">
-        {cartItems.map((cartItem) => (
-          <CartItem key={cartItem.id} cartItem={cartItem} />
-        ))}
-      </div>
+    <CartDropdownContainer>
+      <CartDropdownItemsContainer>
+        {cartItems.length ? (
+          cartItems.map((cartItem) => (
+            <CartItem key={cartItem.id} cartItem={cartItem} />
+          ))
+        ) : (
+          <EmptyMessage>Your cart is Empty!</EmptyMessage>
+        )}
+      </CartDropdownItemsContainer>
       <Button onClick={() => navigate("/checkout")}>Check Out</Button>
-    </div>
+    </CartDropdownContainer>
   );
 };
 
@@ -24,27 +38,24 @@ export const CartIcon = () => {
   const { cartDropdown, setCartDropdown, getTotalQuantity } =
     useContext(cartContext);
   return (
-    <div
-      onClick={() => setCartDropdown(!cartDropdown)}
-      className="cart-icon-container"
-    >
-      <ShoppingIcon className="cart-icon-shopping-icon" />
-      <span className="cart-icon-count">{getTotalQuantity()}</span>
-    </div>
+    <CartIconContainer onClick={() => setCartDropdown(!cartDropdown)}>
+      <CartIconShoppingIcon />
+      <CartIconCount>{getTotalQuantity()}</CartIconCount>
+    </CartIconContainer>
   );
 };
 
 export const CartItem = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
-    <div className="cart-item-container">
+    <CartItemContainer>
       <img src={imageUrl} alt={name} />
-      <div className="cart-item-details">
-        <span className="cart-item-name">{name}</span>
+      <CartItemDetailsContainer>
+        <CartItemName>{name}</CartItemName>
         <span>
           {quantity} x ${price}
         </span>
-      </div>
-    </div>
+      </CartItemDetailsContainer>
+    </CartItemContainer>
   );
 };
