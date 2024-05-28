@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
 
 const addCartItem = (cartItems = [], product = {}) => {
   const foundIndex = cartItems.findIndex(
@@ -52,18 +52,64 @@ export const cartContext = createContext({
   addItemToCart: () => null,
   getTotalQuantity: () => null,
   handleCartItem: () => null,
+  getTotalValue: () => null,
 });
 
-export const CartProvider = ({ children }) => {
-  const [cartDropdown, setCartDropdown] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+export const cartActionType = {
+  toggleCartDropdown: "toggleCartDropdown",
+  handleCartItems: "handleCartItems",
+};
 
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case cartActionType.toggleCartDropdown:
+      return {
+        ...state,
+        cartDropdown: payload,
+      };
+    case cartActionType.handleCartItems:
+      return {
+        ...state,
+        cartItems: payload,
+      };
+    default:
+      throw new Error(`Unhandled type ${type} in cart Reducer`);
+  }
+};
+
+const initialState = {
+  cartDropdown: false,
+  cartItems: [],
+};
+
+export const CartProvider = ({ children }) => {
+  const [{ cartItems, cartDropdown }, dispatch] = useReducer(
+    cartReducer,
+    initialState
+  );
+
+  const setCartItems = (cartItems) => {
+    dispatch({ type: cartActionType.handleCartItems, payload: cartItems });
+  };
+
+  const setCartDropdown = (isOpen) => {
+    dispatch({ type: cartActionType.toggleCartDropdown, payload: isOpen });
+  };
   const addItemToCart = (product) => {
     setCartItems(addCartItem(cartItems, product));
   };
 
   const getTotalQuantity = () => {
     return cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  };
+
+  const getTotalValue = () => {
+    return cartItems.reduce(
+      (total, cartItem) => total + cartItem.price * cartItem.quantity,
+      0
+    );
   };
 
   const handleCartItem = (cartItem, action) => {
@@ -77,6 +123,7 @@ export const CartProvider = ({ children }) => {
     addItemToCart,
     getTotalQuantity,
     handleCartItem,
+    getTotalValue,
   };
   return <cartContext.Provider value={value}>{children}</cartContext.Provider>;
 };
