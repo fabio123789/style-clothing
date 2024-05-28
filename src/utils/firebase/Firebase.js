@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+//import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -19,16 +19,16 @@ import {
   getDocs,
 } from "firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDaxMSnKEKFFiqyAi8JX2m6D5lrUAx-lp0",
-  authDomain: "style-clothing-db-b2f82.firebaseapp.com",
-  projectId: "style-clothing-db-b2f82",
-  storageBucket: "style-clothing-db-b2f82.appspot.com",
-  messagingSenderId: "203571636539",
-  appId: "1:203571636539:web:c12879f9b2dc7e0ebeaf1e",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDaxMSnKEKFFiqyAi8JX2m6D5lrUAx-lp0",
+//   authDomain: "style-clothing-db-b2f82.firebaseapp.com",
+//   projectId: "style-clothing-db-b2f82",
+//   storageBucket: "style-clothing-db-b2f82.appspot.com",
+//   messagingSenderId: "203571636539",
+//   appId: "1:203571636539:web:c12879f9b2dc7e0ebeaf1e",
+// };
 
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
 const googlProvider = new GoogleAuthProvider();
 
