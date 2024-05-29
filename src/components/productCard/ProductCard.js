@@ -1,16 +1,37 @@
-import React, { useContext } from "react";
+import React from "react";
 import Button, { buttonTypeClass } from "../button/Button";
-import { cartContext } from "../../contexts/cartContext";
 import {
   ProductCardContainer,
   ProductCardFooter,
   ProductCardName,
   ProductCardPrice,
 } from "./ProductCardStyled";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../../store/cart/cartSelector";
+import { setCartItems } from "../../store/cart/cartAction";
 
 const ProductCard = ({ product = {} }) => {
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(cartContext);
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+
+  const addCartItem = (product = {}) => {
+    const foundIndex = cartItems.findIndex(
+      (cartItem) => cartItem.id === product.id
+    );
+
+    if (foundIndex >= 0) {
+      return cartItems.map((cartItem, index) =>
+        index === foundIndex
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
+    } else {
+      console.log([...cartItems, { ...product, quantity: 1 }]);
+      return [...cartItems, { ...product, quantity: 1 }];
+    }
+  };
+
   return (
     <ProductCardContainer>
       <img src={imageUrl} alt={name} />
@@ -18,7 +39,7 @@ const ProductCard = ({ product = {} }) => {
         <ProductCardName>{name}</ProductCardName>
         <ProductCardPrice>{price}</ProductCardPrice>
         <Button
-          onClick={() => addItemToCart(product)}
+          onClick={() => dispatch(setCartItems(addCartItem(product)))}
           buttonType={buttonTypeClass.inverted}
         >
           Add to card

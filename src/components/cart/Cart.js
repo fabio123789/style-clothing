@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import Button from "../button/Button";
 import "./CartStyled.js";
-import { cartContext } from "../../contexts/cartContext";
 import { useNavigate } from "react-router-dom";
 import {
   CartDropdownContainer,
@@ -14,9 +13,16 @@ import {
   CartItemName,
   EmptyMessage,
 } from "./CartStyled.js";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCartCount,
+  selectCartItems,
+  selectIsOpen,
+} from "../../store/cart/cartSelector.js";
+import { setIsOpen } from "../../store/cart/cartAction.js";
 
 export const CartDropdown = () => {
-  const { cartItems } = useContext(cartContext);
+  const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
   return (
     <CartDropdownContainer>
@@ -35,12 +41,14 @@ export const CartDropdown = () => {
 };
 
 export const CartIcon = () => {
-  const { cartDropdown, setCartDropdown, getTotalQuantity } =
-    useContext(cartContext);
+  const isOpen = useSelector(selectIsOpen);
+  const cartCount = useSelector(selectCartCount)
+  const dispatch = useDispatch();
+
   return (
-    <CartIconContainer onClick={() => setCartDropdown(!cartDropdown)}>
+    <CartIconContainer onClick={() => dispatch(setIsOpen(!isOpen))}>
       <CartIconShoppingIcon />
-      <CartIconCount>{getTotalQuantity()}</CartIconCount>
+      <CartIconCount>{cartCount}</CartIconCount>
     </CartIconContainer>
   );
 };

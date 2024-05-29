@@ -1,8 +1,5 @@
-import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { userContext } from "../../contexts/userContext";
 import { signoutUser } from "../../utils/firebase/Firebase";
-import { cartContext } from "../../contexts/cartContext";
 import { CartDropdown, CartIcon } from "../cart/Cart";
 import {
   NavigationContainer,
@@ -10,10 +7,13 @@ import {
   NavigationLinkContainer,
   NavigationLogoContainer,
 } from "./NavigationStyles";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/userSelector";
+import { selectIsOpen } from "../../store/cart/cartSelector";
 
 const Navigation = () => {
-  const { currentUser } = useContext(userContext);
-  const { cartDropdown } = useContext(cartContext);
+  const currentUser = useSelector(selectCurrentUser);
+  const isOpen = useSelector(selectIsOpen);
 
   const signOutHandler = async () => {
     await signoutUser();
@@ -35,7 +35,7 @@ const Navigation = () => {
           )}
           <CartIcon />
         </NavigationLinkContainer>
-        {cartDropdown && <CartDropdown />}
+        {isOpen && <CartDropdown />}
       </NavigationContainer>
       <Outlet />
     </>
