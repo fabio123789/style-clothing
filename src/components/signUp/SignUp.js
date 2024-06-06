@@ -1,12 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import {
-  createAuthUserEmailAndPassword,
-  createUserDocFromAuth,
-} from "../../utils/firebase/Firebase";
 import FormInput from "../formInput/FormInput";
 import Button from "../button/Button";
 import { SignuUpContainer } from "./SignUpStyled";
+import { useDispatch } from "react-redux";
+import { emailSignUpStart } from "../../store/user/userAction";
 
 const defaultFormFields = {
   displayName: "",
@@ -18,6 +16,7 @@ const defaultFormFields = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,8 +31,7 @@ const SignUp = () => {
     ) {
       return alert("invalid Email");
     }
-    const { user } = await createAuthUserEmailAndPassword(email, password);
-    await createUserDocFromAuth(user, { displayName });
+    dispatch(emailSignUpStart(email, password, displayName));
     setFormFields(defaultFormFields);
   };
 

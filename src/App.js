@@ -5,11 +5,7 @@ import Navigation from "./components/navigation/Navigation";
 import ErrorBoundary from "./components/errorBoundary/ErrorBoundary";
 import Shop from "./routes/shop/Shop";
 import Checkout from "./routes/checkout/Checkout";
-import {
-  createUserDocFromAuth,
-  onAuthStateChangedListener,
-} from "./utils/firebase/Firebase";
-import { setCurrentUser } from "./store/user/userAction";
+import { checkUserSession } from "./store/user/userAction";
 
 const Home = lazy(() => import("./routes/home/Home"));
 const Authentication = lazy(() =>
@@ -19,13 +15,7 @@ const Authentication = lazy(() =>
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-    unsubscribe();
+    dispatch(checkUserSession());
   }, []);
 
   return (

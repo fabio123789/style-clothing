@@ -1,5 +1,4 @@
 import { Link, Outlet } from "react-router-dom";
-import { signoutUser } from "../../utils/firebase/Firebase";
 import { CartDropdown, CartIcon } from "../cart/Cart";
 import {
   NavigationContainer,
@@ -7,17 +6,16 @@ import {
   NavigationLinkContainer,
   NavigationLogoContainer,
 } from "./NavigationStyles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/userSelector";
 import { selectIsOpen } from "../../store/cart/cartSelector";
+import { signOutStart } from "../../store/user/userAction";
 
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isOpen = useSelector(selectIsOpen);
+  const dispatch = useDispatch();
 
-  const signOutHandler = async () => {
-    await signoutUser();
-  };
   return (
     <>
       <NavigationContainer>
@@ -27,7 +25,7 @@ const Navigation = () => {
         <NavigationLinkContainer>
           <NavigationLink to="/shop">Shop</NavigationLink>
           {currentUser ? (
-            <NavigationLink as="span" onClick={signOutHandler}>
+            <NavigationLink as="span" onClick={() => dispatch(signOutStart())}>
               Sign Out
             </NavigationLink>
           ) : (

@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import {
-  signInWithGooglePopup,
-  signinAuthUserEmailAndPassword,
-} from "../../utils/firebase/Firebase";
 import FormInput from "../formInput/FormInput";
 import Button, { buttonTypeClass } from "../button/Button";
 import { SignInButtonsContainer, SignInFormContainer } from "./SignInStyled";
+import { useDispatch } from "react-redux";
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../store/user/userAction";
 
 const defaultFormFields = {
   email: "",
@@ -16,6 +17,7 @@ const defaultFormFields = {
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +30,7 @@ const SignIn = () => {
       return alert("invalid Email");
     }
     try {
-      await signinAuthUserEmailAndPassword(email, password);
+      dispatch(emailSignInStart(email, password));
       setFormFields(defaultFormFields);
     } catch (error) {
       switch (error.code) {
@@ -53,7 +55,7 @@ const SignIn = () => {
 
   const logGoogleUser = async () => {
     try {
-      await signInWithGooglePopup();
+      dispatch(googleSignInStart());
     } catch (error) {
       console.error("Error logging in with Google", error);
     }
@@ -83,7 +85,11 @@ const SignIn = () => {
         />
         <SignInButtonsContainer>
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType={buttonTypeClass.google} onClick={logGoogleUser}>
+          <Button
+            type="button"
+            buttonType={buttonTypeClass.google}
+            onClick={logGoogleUser}
+          >
             Google Sign In
           </Button>
         </SignInButtonsContainer>
