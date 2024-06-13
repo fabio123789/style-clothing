@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/userSelector";
 import { selectIsOpen } from "../../store/cart/cartSelector";
 import { signOutStart } from "../../store/user/userAction";
-
+import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isOpen = useSelector(selectIsOpen);
@@ -20,7 +20,9 @@ const Navigation = () => {
     <>
       <NavigationContainer>
         <Link className="navigation-link" to="/">
-          <NavigationLogoContainer>logo</NavigationLogoContainer>
+          <NavigationLogoContainer>
+            <CrwnLogo className="logo" />
+          </NavigationLogoContainer>
         </Link>
         <NavigationLinkContainer>
           <NavigationLink to="/shop">Shop</NavigationLink>
