@@ -1,5 +1,5 @@
-import { ActionWithPayload, createAction, withMatcher } from '../../utils/reducer/reducer'
-import { CartItem, cartActionType } from './cartTypes'
+import { ActionWithPayload, createAction, withMatcher } from '../../utils/reducer/reducer.ts'
+import { CartItem, cartActionType } from './cartTypes.ts'
 
 export type SetIsOpen = ActionWithPayload<cartActionType.setIsOpen, boolean>
 

@@ -1,9 +1,9 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import FormInput from '../formInput/FormInput'
-import Button from '../button/Button'
-import { SignuUpContainer } from './SignUpStyled'
+import FormInput from '../formInput/FormInput.tsx'
+import Button from '../button/Button.tsx'
+import { SignuUpContainer } from './SignUpStyled.tsx'
 import { useDispatch } from 'react-redux'
-import { emailSignUpStart } from '../../store/user/userAction'
+import { emailSignUpStart } from '../../store/user/userAction.ts'
 
 const defaultFormFields = {
   displayName: '',

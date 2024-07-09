@@ -9,11 +9,11 @@ import {
   CheckoutItemValue
 } from './CheckoutItemStyled'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCartItems } from '../../store/cart/cartSelector'
+import { selectCartItems } from '../../store/cart/cartSelector.ts'
 import {
   handleCartItemAction
 } from '../../store/cart/cartAction'
-import { CartItem } from '../../store/cart/cartTypes'
+import { CartItem } from '../../store/cart/cartTypes.ts'
 
 type CheckoutItemProps = {
   cartItem: CartItem

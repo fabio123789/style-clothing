@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import ProductCard from '../productCard/ProductCard'
+import ProductCard from '../productCard/ProductCard.tsx'
 import {
   CategoriesContainer,
   CategoryBackgroundImage,

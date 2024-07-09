@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { Category } from '../../store/categories/categoryTypes';
+import { Category } from '../../store/categories/categoryTypes.ts';
 import {
   getAuth,
   signInWithPopup,

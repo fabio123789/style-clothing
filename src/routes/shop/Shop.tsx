@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import './Shop.scss'
 import { Route, Routes } from 'react-router-dom'
-import CategoriesPreview from '../myCategoriesPreview/CategoriesPreview'
-import Category from '../category/Category'
-import { fetchCategoriesStart } from '../../store/categories/categoryAction'
+import CategoriesPreview from '../myCategoriesPreview/CategoriesPreview.tsx'
+import Category from '../category/Category.tsx'
+import { fetchCategoriesStart } from '../../store/categories/categoryAction.ts'
 import { useDispatch } from 'react-redux'
 
 const Shop = () => {

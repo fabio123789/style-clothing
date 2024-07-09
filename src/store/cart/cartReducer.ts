@@ -1,6 +1,6 @@
 import { UnknownAction } from 'redux';
-import { CartItem } from './cartTypes';
-import { setCartItems, setIsOpen } from './cartAction';
+import { CartItem } from './cartTypes.ts';
+import { setCartItems, setIsOpen } from './cartAction.ts';
 
 export type CartState = {
   readonly isOpen: boolean;

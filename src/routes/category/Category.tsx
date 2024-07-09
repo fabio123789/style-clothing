@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Category.scss";
 import { useParams } from "react-router-dom";
-import ProductCard from "../../components/productCard/ProductCard";
+import ProductCard from "../../components/productCard/ProductCard.tsx";
 import { useSelector } from "react-redux";
-import { selectCategoriesMap } from "../../store/categories/categorySelector";
+import { selectCategoriesMap } from "../../store/categories/categorySelector.ts";
 
 type CategoryRouteParams = {
   category: string

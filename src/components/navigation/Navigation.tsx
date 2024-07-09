@@ -1,15 +1,15 @@
 import { Link, Outlet } from "react-router-dom";
-import { CartDropdown, CartIcon } from "../cart/Cart";
+import { CartDropdown, CartIcon } from "../cart/Cart.tsx";
 import {
   NavigationContainer,
   NavigationLink,
   NavigationLinkContainer,
   NavigationLogoContainer,
-} from "./NavigationStyles";
+} from "./NavigationStyles.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser } from "../../store/user/userSelector";
-import { selectIsOpen } from "../../store/cart/cartSelector";
-import { signOutStart } from "../../store/user/userAction";
+import { selectCurrentUser } from "../../store/user/userSelector.ts";
+import { selectIsOpen } from "../../store/cart/cartSelector.ts";
+import { signOutStart } from "../../store/user/userAction.ts";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import React from "react";
 const Navigation = () => {

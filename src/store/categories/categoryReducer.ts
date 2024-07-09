@@ -1,6 +1,6 @@
 import { UnknownAction } from 'redux';
-import { fetchCategoriesFailure, fetchCategoriesStart, fetchCategoriesSuccess } from './categoryAction'
-import { Category } from './categoryTypes'
+import { fetchCategoriesFailure, fetchCategoriesStart, fetchCategoriesSuccess } from './categoryAction.ts'
+import { Category } from './categoryTypes.ts'
 
 export type CategoriesState = {
   readonly categories: Category[];

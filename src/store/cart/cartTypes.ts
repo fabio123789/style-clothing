@@ -1,4 +1,4 @@
-import { CategoryItem } from "../categories/categoryTypes"
+import { CategoryItem } from "../categories/categoryTypes.ts"
 
 export enum cartActionType {
   setIsOpen = 'cart/setIsOpen',

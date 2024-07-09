@@ -1,10 +1,10 @@
 import { takeLatest, all, call, put } from 'typed-redux-saga/macro'
-import { getCategoriesAndDocuments } from '../../utils/firebase/Firebase'
+import { getCategoriesAndDocuments } from '../../utils/firebase/Firebase.ts'
 import {
   fetchCategoriesSuccess,
   fetchCategoriesFailure
-} from './categoryAction'
-import { categoriesActionType } from './categoryTypes'
+} from './categoryAction.ts'
+import { categoriesActionType } from './categoryTypes.ts'
 
 export function * fetchCategoriesAsync () {
   try {

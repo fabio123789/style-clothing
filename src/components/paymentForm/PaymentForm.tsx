@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { buttonTypeClass } from "../button/Button";
+import { buttonTypeClass } from "../button/Button.tsx";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import {
   FormContainer,
@@ -7,9 +7,9 @@ import {
   PaymentFormContainer,
 } from "./PaymentFormStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTotalValue } from "../../store/cart/cartSelector";
-import { selectCurrentUser } from "../../store/user/userSelector";
-import { setCartItems } from "../../store/cart/cartAction";
+import { selectTotalValue } from "../../store/cart/cartSelector.ts";
+import { selectCurrentUser } from "../../store/user/userSelector.ts";
+import { setCartItems } from "../../store/cart/cartAction.ts";
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();

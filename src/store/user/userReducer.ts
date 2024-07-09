@@ -1,6 +1,6 @@
 import { UnknownAction } from 'redux'
-import { UserData } from '../../utils/firebase/Firebase'
-import { emailSignInStart, emailSignUpStart, googleSignInStart, sigInFailure, sigInSuccess, signOutFailed, signOutStart, signOutSuccess, signUpFailure } from './userAction'
+import { UserData } from '../../utils/firebase/Firebase.ts'
+import { emailSignInStart, emailSignUpStart, googleSignInStart, sigInFailure, sigInSuccess, signOutFailed, signOutStart, signOutSuccess, signUpFailure } from './userAction.ts'
 
 export type UserState = {
   readonly currentUser: UserData | null,

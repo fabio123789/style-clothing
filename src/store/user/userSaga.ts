@@ -1,5 +1,5 @@
 import { takeLatest, put, all, call } from 'typed-redux-saga/macro'
-import { userActionType } from './userTypes'
+import { userActionType } from './userTypes.ts'
 import {
   sigInSuccess,
   sigInFailure,
@@ -8,7 +8,7 @@ import {
   signOutSuccess,
   EmailSignInStart,
   EmailSignUpStart
-} from './userAction'
+} from './userAction.ts'
 import {
   AdditionalInformation,
   createAuthUserEmailAndPassword,
@@ -17,7 +17,7 @@ import {
   signInWithGooglePopup,
   signinAuthUserEmailAndPassword,
   signoutUser
-} from '../../utils/firebase/Firebase'
+} from '../../utils/firebase/Firebase.ts'
 import { User } from 'firebase/auth'
 
 export function* getSnapshotFromUserAuth(userAuth: User, additionalDetails?: AdditionalInformation) {

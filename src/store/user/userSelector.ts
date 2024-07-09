@@ -1,5 +1,5 @@
-import { RootState } from "../Store";
-import { UserState } from "./userReducer";
+import { RootState } from "../Store.ts";
+import { UserState } from "./userReducer.ts";
 import { createSelector } from 'reselect';
 
 export const selectUserReducer = (state: RootState): UserState => state.user

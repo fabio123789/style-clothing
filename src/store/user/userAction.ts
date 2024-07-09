@@ -1,6 +1,6 @@
-import { Action, ActionWithPayload, createAction, withMatcher } from '../../utils/reducer/reducer'
-import { userActionType } from './userTypes'
-import { UserData } from '../../utils/firebase/Firebase';
+import { Action, ActionWithPayload, createAction, withMatcher } from '../../utils/reducer/reducer.ts'
+import { userActionType } from './userTypes.ts'
+import { UserData } from '../../utils/firebase/Firebase.ts';
 import { User } from 'firebase/auth';
 
 export type CheckUserSession = Action<userActionType.checkUserSession>

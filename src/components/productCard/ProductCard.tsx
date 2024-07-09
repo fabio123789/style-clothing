@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import Button, { buttonTypeClass } from '../button/Button'
+import Button, { buttonTypeClass } from '../button/Button.tsx'
 import {
   ProductCardContainer,
   ProductCardFooter,
@@ -7,9 +7,9 @@ import {
   ProductCardPrice
 } from './ProductCardStyled'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCartItems } from '../../store/cart/cartSelector'
-import { setCartItems } from '../../store/cart/cartAction'
-import { CategoryItem } from '../../store/categories/categoryTypes'
+import { selectCartItems } from '../../store/cart/cartSelector.ts'
+import { setCartItems } from '../../store/cart/cartAction.ts'
+import { CategoryItem } from '../../store/categories/categoryTypes.ts'
 
 type ProductCardProps = {
   product: CategoryItem

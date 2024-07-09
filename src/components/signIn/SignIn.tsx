@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
-import FormInput from "../formInput/FormInput";
-import Button, { buttonTypeClass } from "../button/Button";
-import { SignInButtonsContainer, SignInFormContainer } from "./SignInStyled";
+import FormInput from "../formInput/FormInput.tsx";
+import Button, { buttonTypeClass } from "../button/Button.tsx";
+import { SignInButtonsContainer, SignInFormContainer } from "./SignInStyled.tsx";
 import { useDispatch } from "react-redux";
 import {
   emailSignInStart,
