@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import Button from '../button/Button.js'
+import Button from '../button/Button.tsx'
 import {
   CartDropdownContainer,
   CartDropdownItemsContainer,
@@ -10,16 +10,16 @@ import {
   CartItemDetailsContainer,
   CartItemName,
   EmptyMessage
-} from './CartStyled.js'
+} from './CartStyled.tsx'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectCartCount,
   selectCartItems,
   selectIsOpen
-} from '../../store/cart/cartSelector.js'
-import { setIsOpen } from '../../store/cart/cartAction.js'
-import { CartItem as CartItemsReducer } from '../../store/cart/cartTypes.js'
+} from '../../store/cart/cartSelector.ts'
+import { setIsOpen } from '../../store/cart/cartAction.ts'
+import { CartItem as CartItemsReducer } from '../../store/cart/cartTypes.ts'
 
 export const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems)

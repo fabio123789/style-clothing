@@ -5,7 +5,7 @@ import {
   ProductCardFooter,
   ProductCardName,
   ProductCardPrice
-} from './ProductCardStyled'
+} from './ProductCardStyled.tsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCartItems } from '../../store/cart/cartSelector.ts'
 import { setCartItems } from '../../store/cart/cartAction.ts'

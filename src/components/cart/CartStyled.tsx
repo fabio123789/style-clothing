@@ -3,7 +3,7 @@ import {
   BaseButton,
   GoogleSigInButton,
   InvertedButton,
-} from "../button/ButtonStyled";
+} from "../button/ButtonStyled.tsx";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 
 export const CartDropdownContainer = styled.div`

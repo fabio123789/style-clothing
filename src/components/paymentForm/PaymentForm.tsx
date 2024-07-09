@@ -5,7 +5,7 @@ import {
   FormContainer,
   PaymentButton,
   PaymentFormContainer,
-} from "./PaymentFormStyles";
+} from "./PaymentFormStyles.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTotalValue } from "../../store/cart/cartSelector.ts";
 import { selectCurrentUser } from "../../store/user/userSelector.ts";

@@ -7,12 +7,12 @@ import {
   CheckoutItemRemoveButton,
   CheckoutItemText,
   CheckoutItemValue
-} from './CheckoutItemStyled'
+} from './CheckoutItemStyled.tsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCartItems } from '../../store/cart/cartSelector.ts'
 import {
   handleCartItemAction
-} from '../../store/cart/cartAction'
+} from '../../store/cart/cartAction.ts'
 import { CartItem } from '../../store/cart/cartTypes.ts'
 
 type CheckoutItemProps = {

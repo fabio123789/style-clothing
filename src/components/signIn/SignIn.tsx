@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import {
   emailSignInStart,
   googleSignInStart,
-} from "../../store/user/userAction";
+} from "../../store/user/userAction.ts";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 
 const defaultFormFields = {

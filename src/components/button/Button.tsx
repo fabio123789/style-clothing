@@ -4,7 +4,7 @@ import {
   ButtonSpinner,
   GoogleSigInButton,
   InvertedButton,
-} from "./ButtonStyled";
+} from "./ButtonStyled.tsx";
 
 export enum buttonTypeClass {
   base = "base",

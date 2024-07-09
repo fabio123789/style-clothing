@@ -2,7 +2,6 @@
   "name": "style-clothing",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@stripe/react-stripe-js": "^2.7.1",
     "@stripe/stripe-js": "^3.5.0",
@@ -31,6 +30,7 @@
     "reselect": "^5.1.0",
     "sass": "^1.77.2",
     "stripe": "^15.10.0",
+    "styled-components": "^6.1.11",
     "typed-redux-saga": "^1.5.0",
     "typescript": "^4.0.0",
     "web-vitals": "^2.1.4",
@@ -72,6 +72,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-react-app": "^7.0.1",
     "globals": "^15.6.0",
     "typescript-eslint": "^7.13.1"
   }
